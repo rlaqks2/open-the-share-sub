@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>관리자 · 단가 관리 | 오픈더쉐어</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin">
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="index.html" class="logo" aria-label="홈페이지로">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="3" width="15" height="15" rx="4"/><rect x="14" y="14" width="15" height="15" rx="4"/></svg>
+      <span>오픈더쉐어<small>관리자</small></span>
+    </a>
+    <nav class="menu admin-menu">
+      <a href="#" aria-current="page">단가 관리</a>
+      <a href="index.html" target="_blank" rel="noopener">홈페이지 보기 ↗</a>
+    </nav>
+    <button class="btn btn-ghost btn-sm" id="logout" hidden>로그아웃</button>
+  </div>
+</header>
+
+<!-- 로그인 -->
+<section class="login" id="login">
+  <form class="card form login-card" id="loginForm">
+    <h1>관리자 로그인</h1>
+    <p class="hint" id="loginHint"></p>
+    <label id="keyWrap">관리자 비밀번호
+      <input type="password" name="key" autocomplete="current-password" required>
+    </label>
+    <button class="btn btn-primary btn-block" type="submit">들어가기</button>
+    <p class="form-msg" role="status"></p>
+  </form>
+</section>
+
+<!-- 단가 관리 -->
+<main class="wrap admin-main" id="app" hidden>
+  <div class="mode-banner" id="modeBanner"></div>
+
+  <header class="admin-head">
+    <div>
+      <h1>키트 단가 관리</h1>
+      <p class="hint">1인 키트 기준 금액입니다. 수정 후 <b>저장</b>을 눌러야 홈페이지에 반영돼요.</p>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <section class="toolbar card">
+    <div class="tb-row">
+      <div class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="q" type="search" placeholder="키트 이름 검색">
+      </div>
+      <select id="fGroup" aria-label="분류"><option value="">전체 분류</option></select>
+      <select id="fLevel" aria-label="난이도"><option value="">전체 난이도</option><option>하</option><option>중</option><option>상</option></select>
+      <label class="check"><input type="checkbox" id="fChanged"> 수정한 것만</label>
+    </div>
+    <div class="tb-row bulk">
+      <span class="bulk-label">일괄 조정 <small id="bulkTarget">(현재 목록 65종)</small></span>
+      <div class="bulk-group">
+        <input type="number" id="bulkPct" value="10" step="1" aria-label="비율(%)"><span>%</span>
+        <button class="btn btn-ghost btn-sm" data-bulk="up">인상</button>
+        <button class="btn btn-ghost btn-sm" data-bulk="down">인하</button>
+      </div>
+      <div class="bulk-group">
+        <input type="number" id="bulkWon" value="1000" step="500" aria-label="금액(원)"><span>원</span>
+        <button class="btn btn-ghost btn-sm" data-bulk="plus">더하기</button>
+        <button class="btn btn-ghost btn-sm" data-bulk="minus">빼기</button>
+        <button class="btn btn-ghost btn-sm" data-bulk="set">모두 이 금액으로</button>
+      </div>
+      <button class="btn btn-ghost btn-sm warn" data-bulk="reset">기본값으로 되돌리기</button>
+    </div>
+  </section>
+
+  <div class="table-wrap card">
+    <table class="ptable">
+      <thead>
+        <tr>
+          <th class="c-img"></th>
+          <th data-sort="name">키트명</th>
+          <th data-sort="group">분류</th>
+          <th data-sort="level">난이도</th>
+          <th data-sort="minutes">시간</th>
+          <th data-sort="base" class="num">기본 단가</th>
+          <th data-sort="price" class="num">판매 단가</th>
+          <th class="c-act"></th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <section class="export card">
+    <div>
+      <h3>파일로 내보내기</h3>
+      <p class="hint">지금 단가를 <code>js/prices.js</code> 파일로 받아 사이트 폴더의 같은 파일과 바꾸면 기본 단가 자체가 바뀝니다. 엑셀용 CSV도 받을 수 있어요.</p>
+    </div>
+    <div class="ex-btns">
+      <button class="btn btn-ghost btn-sm" id="exportJs">prices.js 내보내기</button>
+      <button class="btn btn-ghost btn-sm" id="exportCsv">CSV 내보내기</button>
+      <label class="btn btn-ghost btn-sm file-btn">CSV 가져오기<input type="file" id="importCsv" accept=".csv,text/csv" hidden></label>
+    </div>
+  </section>
+</main>
+
+<div class="savebar" id="savebar" hidden>
+  <div class="wrap savebar-in">
+    <span id="dirtyText">변경 사항 0건</span>
+    <div>
+      <button class="btn btn-ghost btn-sm" id="discard">취소</button>
+      <button class="btn btn-primary btn-sm" id="save">저장하기</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/config.js"></script>
+<script src="js/prices.js"></script>
+<script src="js/kits.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

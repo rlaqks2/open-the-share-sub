@@ -1,0 +1,77 @@
+.admin{background:#f7f8f3}
+.btn-sm{padding:.45rem .9rem;font-size:.85rem;border-width:1.5px}
+.btn.warn{border-color:#e7b9b9;color:#b03a3a}
+.btn.warn:hover{background:#fdeaea}
+.admin-menu{margin-left:2rem}
+.admin-menu a[aria-current]{color:var(--green);font-weight:700}
+#logout{margin-left:auto}
+
+.login{min-height:calc(100vh - 68px);display:grid;place-items:center;padding:16px}
+.login-card{width:min(400px,100%)}
+.login-card h1{font-size:1.4rem;font-weight:900}
+
+.admin-main{padding:2rem 0 7rem}
+.mode-banner{border-radius:14px;padding:.8rem 1rem;font-size:.9rem;margin-bottom:1.2rem}
+.mode-banner.demo{background:#fff8d6;border:1px solid #f1e08a}
+.mode-banner.live{background:var(--green-l);border:1px solid #c7e5bf}
+.admin-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.admin-head h1{font-size:1.6rem;font-weight:900}
+.admin-head .hint{margin-top:.3rem}
+.stats{display:flex;gap:.6rem;flex-wrap:wrap}
+.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:.5rem .9rem;font-size:.8rem;color:var(--muted)}
+.stat b{display:block;font-size:1.05rem;color:var(--ink)}
+
+.toolbar{padding:1rem 1.2rem;display:grid;gap:.9rem;margin-bottom:1rem;box-shadow:none}
+.tb-row{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap}
+.toolbar .search{margin:0;max-width:280px}
+.toolbar select{padding:.55rem .7rem;border-radius:10px;border:1.5px solid var(--line);font:inherit;background:#fff}
+.toolbar .check{display:flex;align-items:center;gap:.4rem;font-size:.88rem;color:var(--ink-2)}
+.toolbar .check input{accent-color:var(--green)}
+.bulk{border-top:1px dashed var(--line);padding-top:.9rem}
+.bulk-label{font-weight:700;font-size:.9rem}
+.bulk-label small{font-weight:400;color:var(--muted)}
+.bulk-group{display:flex;align-items:center;gap:.35rem;background:var(--tint);padding:.3rem .4rem;border-radius:12px}
+.bulk-group input{width:84px;padding:.4rem .5rem;border:1.5px solid var(--line);border-radius:8px;font:inherit;text-align:right}
+.bulk-group span{font-size:.85rem;color:var(--ink-2);margin-right:.2rem}
+
+.table-wrap{overflow:auto;box-shadow:none}
+.ptable{width:100%;border-collapse:collapse;font-size:.92rem}
+.ptable th{position:sticky;top:0;background:#fbfbf7;text-align:left;font-size:.8rem;color:var(--muted);font-weight:700;padding:.7rem .8rem;border-bottom:1px solid var(--line);white-space:nowrap;z-index:1}
+.ptable th[data-sort]{cursor:pointer;user-select:none}
+.ptable th[data-sort]:hover{color:var(--green)}
+.ptable th.sorted::after{content:" ▲";font-size:.7em}
+.ptable th.sorted.desc::after{content:" ▼"}
+.ptable td{padding:.45rem .8rem;border-bottom:1px solid #f0eee4;vertical-align:middle}
+.ptable tr:hover td{background:#fcfdf8}
+.ptable tr.dirty td{background:#fffbea}
+.num{text-align:right!important}
+.c-img{width:56px}
+.c-img img{width:44px;height:44px;object-fit:cover;border-radius:8px}
+.c-act{width:60px;text-align:center}
+.lv{display:inline-block;font-size:.75rem;border-radius:6px;padding:.05rem .45rem}
+.price-in{display:inline-flex;align-items:center;gap:.3rem;justify-content:flex-end}
+.price-in input{width:110px;padding:.45rem .6rem;border:1.5px solid var(--line);border-radius:10px;font:inherit;text-align:right;font-variant-numeric:tabular-nums}
+.price-in input:focus{outline:0;border-color:var(--green);box-shadow:0 0 0 3px var(--green-l)}
+.price-in input.bad{border-color:#e05a5a}
+.diff{display:block;font-size:.72rem;text-align:right;color:var(--muted);min-height:1em}
+.diff.up{color:#c0392b}.diff.down{color:#2471a3}
+.row-reset{border:0;background:none;color:var(--muted);font-size:.8rem;text-decoration:underline;padding:0}
+.row-reset:hover{color:var(--green)}
+
+.export{margin-top:1.2rem;padding:1.2rem 1.4rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center;box-shadow:none}
+.export h3{font-size:1rem}
+.export .hint{font-size:.85rem;margin-top:.2rem;max-width:560px}
+.ex-btns{display:flex;gap:.5rem;flex-wrap:wrap}
+.file-btn{cursor:pointer}
+
+.savebar{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#fff;z-index:45;box-shadow:0 -6px 20px rgba(0,0,0,.15)}
+.savebar-in{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 0}
+.savebar-in div{display:flex;gap:.5rem}
+.savebar .btn-ghost{background:transparent;color:#fff;border-color:#5f6b62}
+
+@media (max-width:720px){
+  .admin-menu{display:none}
+  .ptable .c-grp,.ptable .c-min,.ptable th[data-sort=group],.ptable th[data-sort=minutes]{display:none}
+  .price-in input{width:90px}
+  .toolbar .search{max-width:none}
+}
